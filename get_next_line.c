@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/14 15:30:14 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/14 18:39:52 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,26 @@ int		get_next_line(int fd, char **line)
 			}
 				while (tmp != '\n')
 					*line[y++] = tmp[i++];
+				*line[y] = '\0';
 				if (!(rest = (char *)malloc(sizeof (char * (ret - i) + 1))))
 				{
 					free (line);
 					free (tmp);
-					retrun (-1);
+					return (-1);
 				}
 				y = 0;
-				while (tmp)
-					*rest[y] = tmp[i];
+				tmp[i++];
+				while (tmp[i] != '\0')
+					rest[y++] = tmp[i++];
+				rest[y] = '\0';
+			return (1);
 		}
 		else
 		{
 			if (!(rest = (char *)malloc(sizeof (char * (ret + 1)))))
 			{
 				free(tmp);
-				retrun (-1);
+				return (-1);
 			}
 			while (tmp)
 				rest[y++] = tmp[i++];
