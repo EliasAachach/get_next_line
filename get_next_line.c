@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/14 11:52:53 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:30:14 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,36 @@ int		get_next_line(int fd, char **line)
 		else
 			if (!(tmp = ft_strdup(tab)))
 				return (-1);
-
-		
+		if (ft_strlen_to_n(tmp) > -1)
+		{
+			if (!(*line = (char *)malloc(sizeof(char * ft_strlen_to_n(tmp) 
+			+ 1))))
+			{
+				free(tmp);
+				return (-1);
+			}
+				while (tmp != '\n')
+					*line[y++] = tmp[i++];
+				if (!(rest = (char *)malloc(sizeof (char * (ret - i) + 1))))
+				{
+					free (line);
+					free (tmp);
+					retrun (-1);
+				}
+				y = 0;
+				while (tmp)
+					*rest[y] = tmp[i];
+		}
+		else
+		{
+			if (!(rest = (char *)malloc(sizeof (char * (ret + 1)))))
+			{
+				free(tmp);
+				retrun (-1);
+			}
+			while (tmp)
+				rest[y++] = tmp[i++];
+		}
 	}
 	return (0);
 }
