@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/15 17:43:19 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/16 16:37:08 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t		ft_strlen(char *s)
 
 	count = 0;
 	while (s[count])
-		s[count++];
+		count++;
 	return (count);
 }
 
@@ -63,11 +63,11 @@ size_t		ft_strlen_to_n(char *s)
 	size_t count;
 
 	count = 0;
-	while(s)
+	while(s[count])
 	{
 		if (s[count] == '\n')
 			return (count);
-		s[count++]
+		count++;
 	}
 	return (-1);
 }
