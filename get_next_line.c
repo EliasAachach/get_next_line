@@ -92,11 +92,7 @@ int		get_next_line(int fd, char **line)
 		else
 			if (!(tmp = ft_strdup(tab)))
 				return (-1);
-		if (ft_strlen_to_n(tmp) >= 0)
-		{
-			n_in_tmp(line, tmp, rest, ret);
-			}
-		else
+		if (ft_strlen_to_n(tmp) == -1)
 		{
 			if (!(rest = (char *)malloc(sizeof (char) * (ret + ft_strlen(rest) + 1))))
 			{
@@ -108,6 +104,10 @@ int		get_next_line(int fd, char **line)
 				rest[index] = tmp[index];
 				index++;
 			}
+		}
+		else
+		{
+			n_in_tmp(line, tmp, rest, ret);
 		}
 	}
 	return (0);

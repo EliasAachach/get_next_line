@@ -53,6 +53,8 @@ size_t		ft_strlen(char *s)
 	size_t count;
 
 	count = 0;
+	if (!(s))
+		return (0);
 	while (s[count])
 		count++;
 	return (count);
