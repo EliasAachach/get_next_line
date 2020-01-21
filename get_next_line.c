@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/16 21:04:29 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:24:30 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ int		get_next_line(int fd, char **line)
 	char			tab[BUFFER_SIZE + 1];
 	int				ret;
 	int				index;
+	int o = 0;
 
-	index = 0;
+	index = -1;
 	ret = 0;
 	if ((ret = read (fd, tab, BUFFER_SIZE)) > 0)
 	{
-		tab[BUFFER_SIZE] = '\0';
+		tab[ret] = '\0';
 		if (rest)
 		{
 			if (!(tmp = ft_strjoin(rest, tab)))
@@ -99,15 +100,13 @@ int		get_next_line(int fd, char **line)
 				free(tmp);
 				return (-1);
 			}
-			while (tmp[index])
-			{
+			while (tmp[++index])
 				rest[index] = tmp[index];
-				index++;
-			}
+		ft_putnbr(o++);
 		}
 		else
 		{
-			n_in_tmp(line, tmp, rest, ret);
+			(n_in_tmp(line, tmp, rest, ret));
 		}
 	}
 	return (0);
