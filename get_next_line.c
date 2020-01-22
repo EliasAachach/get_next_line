@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/21 16:24:30 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:47:31 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,20 @@ int		n_in_tmp(char **line, char *tmp, char *rest, int ret)
 		free(tmp);
 		return (-1);
 	}
-	*line[j] = '\0';
+	line[0][j] = '\0';
 	while (++i <= j)
 	{
 		line[0][i] = tmp[i];
 	}
-	if (!(rest = (char *)malloc(sizeof (char) * (ret - i + 1))))
+	if (!(rest = (char *)malloc(sizeof (char) * (ret - i + 2))))
 	{
 		free(line);
 		free(tmp);
 		return (-1);
 	}
-	i++;
-	while (tmp[i] != '\0')
-		rest[y++] = tmp[i++];
-	rest[y] = '\0';
+	rest[ret - i + 2] = '\0';
+	while (tmp[++i] != '\0')
+		rest[y++] = tmp[i];
 	free(tmp);
 	free(rest);
 	return (1);
@@ -82,9 +81,9 @@ int		get_next_line(int fd, char **line)
 
 	index = -1;
 	ret = 0;
-	if ((ret = read (fd, tab, BUFFER_SIZE)) > 0)
+	while ((ret += read (fd, tab, BUFFER_SIZE)) > 0 || ft_strlen_to_n(*line) != -1)
 	{
-		tab[ret] = '\0';
+		tab[BUFFER_SIZE] = '\0';
 		if (rest)
 		{
 			if (!(tmp = ft_strjoin(rest, tab)))
@@ -102,7 +101,7 @@ int		get_next_line(int fd, char **line)
 			}
 			while (tmp[++index])
 				rest[index] = tmp[index];
-		ft_putnbr(o++);
+			rest[index] = '\0';
 		}
 		else
 		{
