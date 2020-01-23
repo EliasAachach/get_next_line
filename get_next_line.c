@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/22 17:47:31 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:47:59 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_putstr(char *s)
 
 int		n_in_tmp(char **line, char *tmp, char *rest, int ret)
 {
+	
 	int i;
 	int y;
 	int j;
@@ -65,8 +66,10 @@ int		n_in_tmp(char **line, char *tmp, char *rest, int ret)
 	rest[ret - i + 2] = '\0';
 	while (tmp[++i] != '\0')
 		rest[y++] = tmp[i];
-	free(tmp);
-	free(rest);
+	if (tmp)
+		free(tmp);
+	if (rest)
+		free(rest);
 	return (1);
 }
 
@@ -79,9 +82,11 @@ int		get_next_line(int fd, char **line)
 	int				index;
 	int o = 0;
 
+	tmp = NULL;
+	rest = NULL;
 	index = -1;
 	ret = 0;
-	while ((ret += read (fd, tab, BUFFER_SIZE)) > 0 || ft_strlen_to_n(*line) != -1)
+	while ((ret += read (fd, tab, BUFFER_SIZE)) > 0)
 	{
 		tab[BUFFER_SIZE] = '\0';
 		if (rest)
@@ -105,7 +110,10 @@ int		get_next_line(int fd, char **line)
 		}
 		else
 		{
-			(n_in_tmp(line, tmp, rest, ret));
+		if (n_in_tmp(line, tmp, rest, ret) == -1)
+			return (-1);
+		if (ft_strlen_to_n(*line) != -1)
+			return (1);
 		}
 	}
 	return (0);
