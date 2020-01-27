@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 15:18:55 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/16 15:14:28 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:39:57 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ size_t	ft_strlen_to_n(char *s);
 size_t	ft_strlen(char *s);
 char	*ft_strdup(char *s1);
 char	*ft_strjoin(char *s1, char *s2);
+void	ft_putnbr(int n);				///
+void	ft_putchar(char c);				///
 
 #endif

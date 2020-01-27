@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/23 16:48:44 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:29:50 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ size_t		ft_strlen_to_n(char *s)
 			return (count);
 		count++;
 	}
-	return (-1);
+	return (0);
 }
