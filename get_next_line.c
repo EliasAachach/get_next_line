@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/04 05:34:54 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/04 05:41:17 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		get_next_line(int fd,char **line)
 	
 	y = 0;
 	i = 0;
-	rest = NULL;
 	tmp = NULL;
 	tab[BUFFER_SIZE] = '\0';
 	if ((ret = read(fd, tab, BUFFER_SIZE)) == -1)
