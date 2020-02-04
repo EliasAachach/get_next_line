@@ -1,0 +1,10 @@
+BUFFER_SIZE 	= 	0
+BUFFER_SIZE 	= 	
+
+ft_is_endl == compte le nombre de char avant '\n';
+
+SI RET > FT_IS_ENDL;
+pour '\n' dans tab -> copie des tab[i] dans line jusqu'a '\n' pui copie de tab dans rest
+
+_______________________________________________________________________________
+

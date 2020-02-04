@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 15:18:55 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/27 15:39:57 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/04 05:12:41 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 # include <string.h>
 
 int		get_next_line(int fd, char **line);
-size_t	ft_strlen_to_n(char *s);
-size_t	ft_strlen(char *s);
+int		ft_strlen_to_n(char *s);
+int		ft_strlen(char *s);
 char	*ft_strdup(char *s1);
 char	*ft_strjoin(char *s1, char *s2);
-void	ft_putnbr(int n);				///
-void	ft_putchar(char c);				///
+int		ft_is_endl(char *str);
 
 #endif

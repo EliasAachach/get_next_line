@@ -20,16 +20,12 @@ int			main()
 
 	line = NULL;
 	fd = open("Rubadub", O_RDONLY);
-	/*while*/if ((i = get_next_line(fd, &line)) > 0)
+	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		ft_putendl((unsigned char *)line);
 		free(line);
 		printf("%d\n", i);
 	}
-	ft_putnbr(ft_strlen(line));
-	ft_putendl((unsigned char *)"segfolte");
-	ft_putendl((unsigned char *)line);
-	ft_putendl((unsigned char *)"segfolte");
 	printf("%d\n", i);
 	free(line);
 	close(fd);

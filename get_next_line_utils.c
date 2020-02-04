@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/01/27 14:29:50 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/04 05:16:14 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char		*ft_strjoin(char *s1, char *s2)
 	return (dest);
 }
 
-size_t		ft_strlen(char *s)
+int		ft_strlen(char *s)
 {
-	size_t count;
+	int count;
 
 	count = 0;
 	if (!(s))
@@ -60,16 +60,17 @@ size_t		ft_strlen(char *s)
 	return (count);
 }
 
-size_t		ft_strlen_to_n(char *s)
+int		ft_is_endl(char *str)
 {
-	size_t count;
+	int count;
 
-	count = 0;
-	while(s[count])
+	count = -1;
+	if(!str)
+		return (count);
+	while(str[++count])
 	{
-		if (s[count] == '\n')
+		if (str[count] == '\n')
 			return (count);
-		count++;
 	}
-	return (0);
+	return (-1);
 }
