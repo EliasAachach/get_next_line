@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/04 05:16:14 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/06 05:23:06 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int		ft_is_endl(char *str)
 {
 	int count;
 
-	count = -1;
+	count = 0;
 	if(!str)
-		return (count);
-	while(str[++count])
+		return (-1);
+	while(str[count++])
 	{
 		if (str[count] == '\n')
 			return (count);
