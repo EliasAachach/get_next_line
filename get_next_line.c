@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/06 05:24:18 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/08 18:44:54 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void putendl(char *str)								//
 		str++;
 	}
 	write(1, "\n", 1);
-}													//
+}
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-}
+}													//
 
 void	ft_putnbr(int n)
 {	unsigned int nbr;
@@ -41,100 +41,68 @@ void	ft_putnbr(int n)
 	ft_putchar(nbr % 10 + '0');
 }
 
-int		get_next_line(int fd,char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*rest;
-	char		*tmp;
 	char		tab[BUFFER_SIZE + 1];
-	int			ret;
-	int			ret_total;
-	int			i;
-	int			y;
+	char		*tmp;
+	int			index;
+	int 		ret;
+	int 		y;
+	int 		i;
 
-	y = 0;
+	rest = NULL;
+	y = -1;
 	i = 0;
+	index = -1;
 	tmp = NULL;
-	ret_total = 0;
-	tab[BUFFER_SIZE] = '\0';
-	if ((ret = read(fd, tab, BUFFER_SIZE)) == -1)
+	if (fd == -1 || (ret = read(fd, tab, BUFFER_SIZE)) == -1)
 		return (-1);
 	else if (ret == 0)
 		return (0);
 	else if (ft_is_endl(tab) < 0)
 	{
-		ret_total = ret;
+		if (rest)
+			tmp = ft_strdup(rest);
 		while (ft_is_endl(tab) < 0)
 		{
-			if (!(rest = (char *)malloc(sizeof (char) * ret_total + 1)))
-				return (-1);
-			while (tab[i])
-			{
-				rest[i] = tab[i];
-				i++;
-			}
-			rest[i] = '\0';
-			if ((ret = read(fd, tab, BUFFER_SIZE)) == 0)
-			{
-				free(rest);
-				return (0);
-			}
-			else if (ret == -1)
-			{
-				free(rest);
-				return (-1);
-			}
+			if (!tmp)
+				tmp = ft_strdup(tab);
 			else
-				ret_total += ret;
+				tmp = ft_strjoin(tmp, tab);
+			read(fd, tab, BUFFER_SIZE);
 		}
-		putendl("isendl tab: ");
-		ft_putnbr(ft_is_endl(tab));
-		ft_putchar('\n');
-		if (!(line[0] = (char *)malloc(sizeof(char) * ft_strlen(rest) + 1)))
+		if (!(line[0] = (char *)malloc(sizeof (char) * (ft_strlen(tmp) + ft_is_endl(tab) + 1))))
 		{
-			free(rest);
+			free (tmp);
 			return (-1);
 		}
-		while (rest[y])
+		while (tmp[++index])
+			line[0][index] = tmp[index];
+		while (++y <= ft_is_endl(tab))
 		{
-			line[0][y] = rest[y];
-			y++;
+			line[0][index++] = tab[y];
 		}
-		line[0][y] = '\0';
-		free(rest);
+		line[0][index] = '\0';
+		if (!(rest = (char *)malloc(sizeof (char) * (ft_strlen(tab) - ft_is_endl(tab) + 1))))
+		{
+			free (line);
+			free (tmp);
+			return (-1);
+		}
+		while (tab[i])
+		{
+			rest[i++] = tab[y++];
+		}
 		return (1);
 	}
-	else if (ft_is_endl(tab) <= ret)
+	else
 	{
-		if (!(line[0] = (char *)malloc(sizeof(char) * (ft_is_endl(tab) +
-							ft_strlen(rest)))))
+		if (!(line[0] = (char *)malloc(sizeof (char) * ft_is_endl(tab) + 1)))
 		{
-			ft_putnbr(ft_is_endl(tab));
 			return (-1);
 		}
-		if (rest)
-		{
-			while (i < ft_strlen(rest))
-				line[0][i] = rest[i];
-			i++;
-		}
-		while ((i - ft_strlen(rest)) < ft_is_endl(tab))
-		{
-			line[0][i] = tab[i];
-			i++;
-		}
-		line[0][i] = '\0';
-		if ((ret - i) != 0)
-		{
-			if (!(rest = (char *)malloc(sizeof (char) * (ret - i + 1))))
-			{
-				free (line[0]);
-				return (-1);
-			}
-			while (tab[i])
-				tab[i++] = rest[y++];
-			rest[y] = '\0';
-		}
-		return (1);
+		
 	}
-	return (0);
+	return (1);
 }

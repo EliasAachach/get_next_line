@@ -20,15 +20,15 @@ int			main()
 
 	line = NULL;
 	fd = open("Rubadub", O_RDONLY);
-	while ((i = get_next_line(fd, &line)) > 0)
+	/*while*/if ((i = get_next_line(fd, &line)) > 0)
 	{
 		ft_putendl((unsigned char *)line);
 		free(line);
 		printf("%d\n", i);
 	}
 	printf("%d\n", i);
-	free(line);
+	//free(line);
 	close(fd);
-	system("leaks a.out");
+	//system("leaks a.out");
 	return (0);
 }
