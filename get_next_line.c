@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/08 18:44:54 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:44:24 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,24 @@ void	ft_putnbr(int n)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*rest;
+	static char	*rest = NULL;
 	char		tab[BUFFER_SIZE + 1];
 	char		*tmp;
 	int			index;
 	int 		ret;
 	int 		y;
+	int			j;
 	int 		i;
+	int 		len;
 
 	rest = NULL;
-	y = -1;
+	y = 0;
+	j = 0;
 	i = 0;
+	len = 0;
 	index = -1;
 	tmp = NULL;
+	tab[BUFFER_SIZE] = '\0';
 	if (fd == -1 || (ret = read(fd, tab, BUFFER_SIZE)) == -1)
 		return (-1);
 	else if (ret == 0)
@@ -79,14 +84,15 @@ int	get_next_line(int fd, char **line)
 		}
 		while (tmp[++index])
 			line[0][index] = tmp[index];
-		while (++y <= ft_is_endl(tab))
+		while (y <= ft_is_endl(tab))
 		{
 			line[0][index++] = tab[y];
+			y++;
 		}
 		line[0][index] = '\0';
 		if (!(rest = (char *)malloc(sizeof (char) * (ft_strlen(tab) - ft_is_endl(tab) + 1))))
 		{
-			free (line);
+			free (line[0]);
 			free (tmp);
 			return (-1);
 		}
@@ -98,11 +104,52 @@ int	get_next_line(int fd, char **line)
 	}
 	else
 	{
-		if (!(line[0] = (char *)malloc(sizeof (char) * ft_is_endl(tab) + 1)))
+		if (rest)
+			len = ft_is_endl(tab) + ft_is_endl(rest);
+		else
+			len = ft_is_endl(tab);
+
+		if (!(line[0] = (char *)malloc(sizeof (char) * len + 1)))
+			return (-1);
+		if (rest)
 		{
+			putendl("ahhhh");
+			while (y < ft_is_endl(rest))
+			{
+				line[0][i] = rest[y];
+				i++;
+				y++;
+			}
+			while (rest)
+			{
+				putendl("oui");
+				tmp[j] = rest[y];
+				j++;
+				y++;
+			}
+			putendl(tmp);
+		}
+		y = 0;
+		while (y < ft_is_endl(tab))
+		{
+			line[0][i] = tab[y];
+			i++;
+			y++;
+		}
+		line[0][i] = '\0';
+		if (!(rest = (char *)malloc(sizeof(char) * (ft_is_endl(tab) - y))))
+		{
+			free (line[0]);
 			return (-1);
 		}
-		
+		i = 0;
+		while (tab[y])
+		{
+			rest[i] = tab[y];
+			i++;
+			y++;
+		}
+		rest[i] = '\0';
 	}
 	return (1);
 }

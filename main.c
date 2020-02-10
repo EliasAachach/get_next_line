@@ -19,8 +19,8 @@ int			main()
 	int		i;
 
 	line = NULL;
-	fd = open("Rubadub", O_RDONLY);
-	/*while*/if ((i = get_next_line(fd, &line)) > 0)
+	fd = open("budabuR", O_RDONLY);
+while/*if*/ ((i = get_next_line(fd, &line)) > 0)
 	{
 		ft_putendl((unsigned char *)line);
 		free(line);
