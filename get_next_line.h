@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 15:18:55 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/12 14:31:20 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/12 15:22:24 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 
 typedef struct	s_gnl
 {
-	int	len;
-	int ret;
+	char	tmp;
+	int		len;
+	int 	ret;
 }				t_gnl;
 
 int		get_next_line(int fd, char **line);
