@@ -6,7 +6,7 @@
 /*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 15:18:55 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/04 05:12:41 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/12 14:31:20 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+
+typedef struct	s_gnl
+{
+	int	len;
+	int ret;
+}				t_gnl;
 
 int		get_next_line(int fd, char **line);
 int		ft_strlen_to_n(char *s);

@@ -9,3 +9,9 @@ pour '\n' dans tab -> copie des tab[i] dans line jusqu'a '\n' pui copie de tab d
 _______________________________________________________________________________
 
 tout mettre dans rest si \n
+
+use substr
+
+tmp
+buf
+str
