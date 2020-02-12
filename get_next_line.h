@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 15:18:55 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/12 15:22:24 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/12 19:09:33 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 
 typedef struct	s_gnl
 {
-	char	tmp;
+	char	*tmp;
+	char	*str;
 	int		len;
 	int 	ret;
+	int		pos;
+	int		i;
+	int		j;
 }				t_gnl;
 
 int		get_next_line(int fd, char **line);

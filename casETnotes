@@ -15,3 +15,9 @@ use substr
 tmp
 buf
 str
+
+FT_FREE
+if (gnl.tmp)
+			free(gnl.tmp);
+
+REST 
