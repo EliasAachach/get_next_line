@@ -15,9 +15,9 @@ use substr
 tmp
 buf
 str
-
+___________________________________________________________________________
 FT_FREE
 if (gnl.tmp)
 			free(gnl.tmp);
 
-REST 
+REST

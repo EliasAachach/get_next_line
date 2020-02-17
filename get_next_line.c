@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/12 19:09:30 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/14 17:16:19 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	ft_putnbr(int n)
 	if (nbr >= 10)
 		ft_putnbr(nbr / 10);
 	ft_putchar(nbr % 10 + '0');
-}
-	
+}													//
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*rest = NULL;
@@ -86,7 +86,7 @@ int	get_next_line(int fd, char **line)
 		line[0][gnl.i] = gnl.str[gnl.i];
 		(gnl.i)++;
 	}
-	line[0][gnl.i] = '\0'
+	line[0][gnl.i] = '\0';
 	(gnl.i)++;
 	while(gnl.i <= gnl.ret && gnl.str)
 	{

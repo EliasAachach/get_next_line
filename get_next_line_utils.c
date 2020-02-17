@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elaachac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/06 05:27:23 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/14 17:16:18 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,21 @@ int		ft_is_endl(char *str)
 			return (count);
 	}
 	return (-1);
+}
+
+char	*ft_substr(char *s, int start, int len)
+{
+	int		i;
+	char	*s2;
+
+	i = 0;
+	if (!s || !(s2 = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	if (ft_strlen(s) > start)
+	{
+		while (len-- && i < ft_strlen(s))
+			s2[i++] = s[start++];
+	}
+	s2[i] = '\0';
+	return (s2);
 }
