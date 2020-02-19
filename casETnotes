@@ -1,23 +1,6 @@
-BUFFER_SIZE 	= 	0
-BUFFER_SIZE 	= 	
+ca lis ue fois de trop
+donc apres lecture buf = ligne suivante
 
-ft_is_endl == compte le nombre de char avant '\n';
-
-SI RET > FT_IS_ENDL;
-pour '\n' dans tab -> copie des tab[i] dans line jusqu'a '\n' pui copie de tab dans rest
-
-_______________________________________________________________________________
-
-tout mettre dans rest si \n
-
-use substr
-
-tmp
-buf
-str
-___________________________________________________________________________
-FT_FREE
-if (gnl.tmp)
-			free(gnl.tmp);
-
-REST
+cpy de str dans line
+puis
+cpy de buf en partant de pos jusqu'a fin de buf dans rest
