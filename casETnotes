@@ -4,3 +4,7 @@ donc apres lecture buf = ligne suivante
 cpy de str dans line
 puis
 cpy de buf en partant de pos jusqu'a fin de buf dans rest
+
+PROTEGER RETOUR MALLOC STRDUP PAR EX
+__________________________________________________________________________________
+REST SUBSTR;

@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/19 18:09:53 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:30:03 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,39 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	while ((gnl.pos = ft_is_endl(gnl.str)) == -1 && ((gnl.ret = read(fd, buf, BUFFER_SIZE)) > 0))
 	{
-	putendl("ouah");
 		gnl.len += gnl.ret;
 		if (!gnl.str)
-			gnl.str = ft_strdup(buf);
+		{
+			if ((gnl.str = ft_strdup(buf)) == NULL)
+			{
+				ft_free(&gnl, line, 0);
+				return (-1);
+			}
+		}
 		else
 		{
-			gnl.str = ft_strjoin(gnl.tmp, buf);
-			putendl(gnl.str);
-			gnl.tmp = ft_strdup(gnl.str);
-	putendl("blop");
+			if ((gnl.str = ft_strjoin(gnl.tmp, buf)) == NULL)
+			{
+				ft_free(&gnl, line, 0);
+				return (-1);
+			}
+		}
+		if ((gnl.tmp = ft_strdup(gnl.str)) == NULL)
+		{
+			ft_free(&gnl, line, 0);
+			return (-1);
 		}
 	}
-	gnl.tmp = ft_substr(buf, 0, gnl.pos);
-	gnl.str = ft_strdup(gnl.tmp);	
+	if((gnl.tmp = ft_substr(buf, 0, gnl.pos)) == NULL)
+		{
+			ft_free(&gnl, line, 0);
+			return (-1);
+		}
+	if ((gnl.str = ft_strdup(gnl.tmp)) == NULL)
+	{
+		ft_free(&gnl, line, 0);
+		return (-1);
+	}
 	if (!(*line = (char *)malloc(sizeof(char) * (gnl.len + 1))))
 	{
 		ft_free(&gnl, line, 0);
@@ -105,6 +124,20 @@ int	get_next_line(int fd, char **line)
 			gnl.i++;
 		}
 	}
+	gnl.j = gnl.i;
+	putendl(gnl.tmp);
+	free(gnl.tmp);
+	if ((gnl.tmp = ft_substr(rest, gnl.i, (ft_strlen(rest) - gnl.i))) == NULL)
+	{
+		return (-1);
+	}
+	if (rest)
+		free(rest);
+	if (!(rest = (char *)malloc(sizeof(char) * (gnl.len - gnl.pos + 1))))
+	{
+		ft_free(&gnl, line, 0);
+		return (-1);
+	}
 	while (gnl.i < gnl.len && gnl.pos != 1)
 	{
 		line[0][gnl.i] = gnl.str[gnl.j];
@@ -112,14 +145,7 @@ int	get_next_line(int fd, char **line)
 		gnl.j++;
 	}
 	line[0][gnl.i] = '\0';
-	gnl.i++;
-	gnl.i -= ft_strlen(rest);
 	gnl.j = 0;
-	if (!(rest = (char *)malloc(sizeof(char) * (gnl.ret - gnl.pos + 1))))
-	{
-		ft_free(&gnl, line, 1);
-		return (-1);
-	}
 	while(gnl.pos <= gnl.len && buf[gnl.pos])
 	{
 		rest[gnl.j] = buf[gnl.pos];
@@ -127,6 +153,5 @@ int	get_next_line(int fd, char **line)
 		gnl.j++;
 	}
 	rest[gnl.j] = '\0';
-	putendl(rest);
 	return (1);
 }
