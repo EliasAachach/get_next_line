@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/02/20 18:30:03 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/02/21 14:35:17 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,14 @@ int	get_next_line(int fd, char **line)
 			line[0][gnl.i] = rest[gnl.i];
 			gnl.i++;
 		}
-	}
-	gnl.j = gnl.i;
-	putendl(gnl.tmp);
-	free(gnl.tmp);
-	if ((gnl.tmp = ft_substr(rest, gnl.i, (ft_strlen(rest) - gnl.i))) == NULL)
-	{
-		return (-1);
-	}
-	if (rest)
+		gnl.j = gnl.i;
+		free(gnl.tmp);
+		if ((gnl.tmp = ft_substr(rest, gnl.i, (ft_strlen(rest) - gnl.i))) == NULL)
+		{
+			return (-1);
+		}
 		free(rest);
+	}
 	if (!(rest = (char *)malloc(sizeof(char) * (gnl.len - gnl.pos + 1))))
 	{
 		ft_free(&gnl, line, 0);
