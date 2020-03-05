@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/05 00:14:22 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:27:59 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,62 +42,67 @@ void	ft_putnbr(int n)
 	ft_putchar(nbr % 10 + '0');
 }													//
 
-void ft_free(t_gnl *gnl, char **line, int free_line)
+static	int ft_free(void	**var, int ret_value)
 {
-	if (gnl->tmp)
-		free(gnl->tmp);
-	if (gnl->str)
-		free(gnl->str);
-	if (free_line == 0)
+	if (*var)
 	{
-		if (line)
-			free(*line);
+		free (*var);
+		*var = NULL;
 	}
+	return (ret_value);
 }
 
 static	int	get_line(char **rest, char **line, size_t start)
 {
-	char *tmp;
+	char	*tmp;
 
-	if ((tmp = ft_strchr(rest)))
+	if (!(tmp = ft_strchr(*rest + start, (int)'\n')))
+		return (0);
+	*line = ft_substr(*rest, 0, tmp - *rest);
+	ft_memcpy(*rest, tmp + 1, ft_strlen(tmp));
+	return (1);
 }
 
 static	int	read_fd(int fd, char **line, char **rest)
 {
-	char	*buf;
-	int		total_len;
-	int		len;
+	char		*buf;
+	ssize_t		total_len;
+	ssize_t		len;
 
 	if (!(buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-		//////
-	while ((gnl.ret = read(fd, buf, BUFFER_SIZE)))
+	total_len = *rest ? ft_strlen(*rest) : 0;
+	while ((len = read(fd, buf, BUFFER_SIZE)))
 	{
 		*rest = ft_realloc(*rest, total_len + len + 1, total_len);
 		ft_memcpy(*rest + total_len, buf, len);
 		*rest[total_len + len] = '\0';
 		if (get_line(rest, line, total_len))
-			return (ft_free(&gnl, line, 0));
+			return (ft_free((void **)&buf, 1));
+		total_len += len;
 	}
+	return (ft_free((void **)&buf, 0));
 }
 
-int	get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
-	static char	*rest = NULL;
-	char		buf[BUFFER_SIZE + 1];
-	t_gnl		gnl;
+	static char		*rest = NULL;
+	int 			ret;
 
-	gnl.tmp = NULL;
-	gnl.str = NULL;
-	gnl.len = ft_strlen(rest);
-	gnl.i = 0;
-	gnl.j = 0;
-	gnl.pos = 0;
-	gnl.ret = 0;
 	if (line == NULL || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
 		return (-1);
-	while ((gnl.pos = ft_is_endl(gnl.str)) == -1 && ((gnl.ret = read(fd, buf, BUFFER_SIZE)) > 0))
+	if (rest && get_line(&rest, line, 0))
+		return (1);
+	if ((ret = read_fd(fd, line, &rest)))
+		return (ret);
+	*line = rest;
+	if (*line == NULL)
 	{
+		if (!(*line = (char *)malloc(sizeof(char) * 1)))
+			return (-1);
+		*line[0] = '\0';
 		return (0);
 	}
+	rest = NULL;
+	return (0);
 }
