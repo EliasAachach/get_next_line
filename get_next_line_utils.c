@@ -6,15 +6,15 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/05 18:29:00 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:09:56 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strlen(char *s)
+size_t		ft_strlen(const	char *s)
 {
-	int count;
+	size_t count;
 
 	count = 0;
 	if (!(s))
@@ -24,24 +24,18 @@ int		ft_strlen(char *s)
 	return (count);
 }
 
-char	*ft_substr(char *s, int start, int len)
+char				*ft_substr(const char *s, unsigned int start, size_t n)
 {
-	int		i;
-	char	*s2;
+	char			*str;
 
-	i = 0;
-	if (!s || !(s2 = (char *)malloc(sizeof(char) * (len + 1))))
+	if (!(str = (char*)malloc(sizeof(char) * (n + 1))))
 		return (NULL);
-	if (ft_strlen(s) > start)
-	{
-		while (len-- && i < ft_strlen(s))
-			s2[i++] = s[start++];
-	}
-	s2[i] = '\0';
-	return (s2);
+	str[n] = '\0';
+	ft_memcpy(str, s + start, n);
+	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr(const char *s, int c)
 {
 	while (s)
 	{
@@ -52,7 +46,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_realloc (void *ptr, size_t size, size_t old_size)
+char		*ft_realloc (void *ptr, size_t size, size_t old_size)
 {
 	void *tmp;
 	
@@ -62,7 +56,7 @@ char	*ft_realloc (void *ptr, size_t size, size_t old_size)
 	return (tmp);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void		*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
 	unsigned char	*str;

@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/05 18:27:59 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:03:51 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static	int	read_fd(int fd, char **line, char **rest)
 
 	if (!(buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	total_len = *rest ? ft_strlen(*rest) : 0;
+	total_len = (*rest) ? ft_strlen(*rest) : 0;
 	while ((len = read(fd, buf, BUFFER_SIZE)))
 	{
 		*rest = ft_realloc(*rest, total_len + len + 1, total_len);
 		ft_memcpy(*rest + total_len, buf, len);
-		*rest[total_len + len] = '\0';
+		(*rest)[total_len + len] = '\0';
 		if (get_line(rest, line, total_len))
 			return (ft_free((void **)&buf, 1));
 		total_len += len;
@@ -95,7 +95,7 @@ int			get_next_line(int fd, char **line)
 		return (1);
 	if ((ret = read_fd(fd, line, &rest)))
 		return (ret);
-	*line = rest;
+	(*line) = rest;    
 	if (*line == NULL)
 	{
 		if (!(*line = (char *)malloc(sizeof(char) * 1)))
