@@ -6,11 +6,21 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/09 15:09:56 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/09 17:11:50 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void putndl(char *str)								//
+{
+	while (*str)
+	{
+		write(1, &(*str), 1);
+		str++;
+	}
+	write(1, "\n", 1);
+}
 
 size_t		ft_strlen(const	char *s)
 {
@@ -37,7 +47,9 @@ char				*ft_substr(const char *s, unsigned int start, size_t n)
 
 char		*ft_strchr(const char *s, int c)
 {
-	while (s)
+	if ((char)c == '\0')
+		return ("\0");
+	while (*s)
 	{
 		if (*s == (char)c)
 			return ((char *)s);

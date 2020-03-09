@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/09 16:03:51 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:44:43 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ int			get_next_line(int fd, char **line)
 		return (1);
 	if ((ret = read_fd(fd, line, &rest)))
 		return (ret);
-	(*line) = rest;    
+	*line = rest;    
 	if (*line == NULL)
 	{
 		if (!(*line = (char *)malloc(sizeof(char) * 1)))
 			return (-1);
-		*line[0] = '\0';
+		(*line)[0] = '\0';
 		return (0);
 	}
 	rest = NULL;
