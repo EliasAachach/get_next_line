@@ -6,21 +6,11 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:22:23 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/09 17:11:50 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:54:33 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void putndl(char *str)								//
-{
-	while (*str)
-	{
-		write(1, &(*str), 1);
-		str++;
-	}
-	write(1, "\n", 1);
-}
 
 size_t		ft_strlen(const	char *s)
 {
@@ -34,7 +24,7 @@ size_t		ft_strlen(const	char *s)
 	return (count);
 }
 
-char				*ft_substr(const char *s, unsigned int start, size_t n)
+char		*ft_substr(const char *s, unsigned int start, size_t n)
 {
 	char			*str;
 
@@ -58,13 +48,13 @@ char		*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char		*ft_realloc (void *ptr, size_t size, size_t old_size)
+char		*ft_realloc(void *ptr, size_t size, size_t old_size)
 {
 	void *tmp;
-	
+
 	if ((tmp = (void *)malloc(sizeof(void) * size)))
 		ft_memcpy(tmp, ptr, old_size);
-	free (ptr);
+	free(ptr);
 	return (tmp);
 }
 

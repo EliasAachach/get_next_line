@@ -6,47 +6,17 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:54:13 by elaachac          #+#    #+#             */
-/*   Updated: 2020/03/09 16:44:43 by elaachac         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:57:08 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-void putendl(char *str)								//
-{
-	while (*str)
-	{
-		write(1, &(*str), 1);
-		str++;
-	}
-	write(1, "\n", 1);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}													//
-
-void	ft_putnbr(int n)
-{	unsigned int nbr;
-
-	nbr = n;
-	if (n < 0)
-	{
-		ft_putchar('-');
-		nbr = -n;
-	}
-	if (nbr >= 10)
-		ft_putnbr(nbr / 10);
-	ft_putchar(nbr % 10 + '0');
-}													//
-
-static	int ft_free(void	**var, int ret_value)
+static	int	ft_free(void **var, int ret_value)
 {
 	if (*var)
 	{
-		free (*var);
+		free(*var);
 		*var = NULL;
 	}
 	return (ret_value);
@@ -86,8 +56,8 @@ static	int	read_fd(int fd, char **line, char **rest)
 
 int			get_next_line(int fd, char **line)
 {
-	static char		*rest = NULL;
-	int 			ret;
+	static char	*rest = NULL;
+	int			ret;
 
 	if (line == NULL || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
 		return (-1);
@@ -95,7 +65,7 @@ int			get_next_line(int fd, char **line)
 		return (1);
 	if ((ret = read_fd(fd, line, &rest)))
 		return (ret);
-	*line = rest;    
+	*line = rest;
 	if (*line == NULL)
 	{
 		if (!(*line = (char *)malloc(sizeof(char) * 1)))
