@@ -16,6 +16,10 @@
 # include <stdlib.h>
 # include <string.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 200
+# endif
+
 char	*ft_substr(const char *s, unsigned int start, size_t n);
 int		get_next_line(int fd, char **line);
 char	*ft_realloc(void *ptr, size_t size, size_t old_size);
